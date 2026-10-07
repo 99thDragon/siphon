@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIPHON — Video Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="top">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <h1 class="logo-text">SIPHON</h1>
+    </div>
+    <p class="tagline">Paste a link. Get the file.</p>
+  </header>
+
+  <main>
+
+    <!-- ── STEP 1: LINK ──────────────────────────────────── -->
+    <section class="panel" id="panel-url">
+      <span class="step-badge cyan">STEP 1</span>
+      <label class="field-label" for="url">PASTE THE VIDEO LINK</label>
+      <div class="url-row">
+        <input id="url" type="url" spellcheck="false" autocomplete="off"
+               placeholder="https://www.youtube.com/watch?v=..." />
+        <button id="btn-fetch" class="btn btn-cyan">FETCH</button>
+      </div>
+      <p class="hint" id="url-hint">
+        Copy the address from your browser and paste it above.<span class="blink-cursor cyan">_</span>
+      </p>
+    </section>
+
+    <!-- ── STEP 2: PREVIEW + QUALITY ─────────────────────── -->
+    <section class="panel hidden" id="panel-preview">
+      <span class="step-badge purple">STEP 2</span>
+
+      <div class="preview">
+        <div class="thumb-wrap">
+          <img id="thumb" alt="" />
+        </div>
+        <div class="preview-meta">
+          <h2 id="v-title">—</h2>
+          <p class="muted"><span id="v-uploader"></span><span id="v-duration" class="pill"></span></p>
+        </div>
+      </div>
+
+      <label class="field-label">PICK A QUALITY</label>
+      <div class="quality-grid" id="quality">
+        <button class="q-btn selected" data-q="best">
+          <span class="q-name">BEST</span>
+          <span class="q-hint">Highest available</span>
+        </button>
+        <button class="q-btn" data-q="1080">
+          <span class="q-name">1080p</span>
+          <span class="q-hint">Full HD, smaller</span>
+        </button>
+        <button class="q-btn" data-q="720">
+          <span class="q-name">720p</span>
+          <span class="q-hint">Smallest video</span>
+        </button>
+        <button class="q-btn" data-q="audio">
+          <span class="q-name">MP3</span>
+          <span class="q-hint">Audio only</span>
+        </button>
+      </div>
+
+      <label class="check hidden" id="playlist-row">
+        <input type="checkbox" id="playlist" />
+        <span>This link is a playlist — download <strong>every</strong> video in it</span>
+      </label>
+
+      <div class="actions">
+        <button id="btn-download" class="btn btn-green big">DOWNLOAD</button>
+        <button id="btn-back" class="btn btn-ghost">Use a different link</button>
+      </div>
+    </section>
+
+    <!-- ── STEP 3: PROGRESS ──────────────────────────────── -->
+    <section class="panel hidden" id="panel-progress">
+      <span class="step-badge green">WORKING</span>
+      <h2 class="job-title" id="p-title">—</h2>
+
+      <div class="percent-row">
+        <span class="percent" id="p-percent">0%</span>
+        <span class="stage" id="p-stage">Starting up<span class="blink-cursor green">_</span></span>
+      </div>
+
+      <div class="bar"><div class="bar-fill" id="p-bar"></div></div>
+
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">SPEED</span><span id="p-speed">—</span></div>
+        <div class="stat"><span class="stat-label">TIME LEFT</span><span id="p-eta">—</span></div>
+        <div class="stat"><span class="stat-label">DONE</span><span id="p-files">0 files</span></div>
+      </div>
+
+      <div class="actions">
+        <button id="btn-cancel" class="btn btn-ghost">Cancel</button>
+      </div>
+    </section>
+
+    <!-- ── DONE ──────────────────────────────────────────── -->
+    <section class="panel hidden" id="panel-done">
+      <span class="step-badge green">FINISHED</span>
+      <div class="done-mark">✓</div>
+      <h2 class="job-title" id="d-title">Saved</h2>
+      <p class="path" id="d-path"></p>
+      <div class="actions">
+        <button id="btn-open" class="btn btn-green big">OPEN FOLDER</button>
+        <button id="btn-again" class="btn btn-ghost">Download another</button>
+      </div>
+    </section>
+
+    <!-- ── ERROR ─────────────────────────────────────────── -->
+    <section class="panel hidden" id="panel-error">
+      <span class="step-badge pink">PROBLEM</span>
+      <h2 class="glitch-text" id="e-msg">Something went wrong.</h2>
+      <p class="muted" id="e-help"></p>
+      <div class="actions">
+        <button id="btn-retry" class="btn btn-ghost">Try again</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="health">
+    <span class="h-item"><span class="dot" id="h-ytdlp"></span>yt-dlp</span>
+    <span class="h-item"><span class="dot" id="h-ffmpeg"></span>ffmpeg</span>
+    <span class="h-item"><span class="dot" id="h-deno"></span>deno</span>
+    <span class="h-spacer"></span>
+    <span class="h-note">running locally on your PC</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

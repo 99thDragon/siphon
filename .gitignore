@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# Downloads never live in the project folder - they go to the user's
+# ~/Movies or ~/Videos library. Listed defensively in case anyone points
+# the output here.
+*.mp4
+*.mp3
+*.webm
+*.part

@@ -1,0 +1,17 @@
+# Keep line endings correct on every platform.
+# Shell scripts MUST be LF: a CRLF shebang fails with "bad interpreter".
+# Batch files MUST be CRLF: cmd.exe mishandles LF-only labels and goto.
+
+* text=auto eol=lf
+
+*.sh   text eol=lf
+*.py   text eol=lf
+*.js   text eol=lf
+*.css  text eol=lf
+*.html text eol=lf
+*.md   text eol=lf
+
+*.bat  text eol=crlf
+
+*.png  binary
+*.mp4  binary
